@@ -19,14 +19,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       // A widget which will be started on application startup
-      home: MyHomePage(title: 'Library App'),
+      home: MyHomePage(titleImage: AssetImage('..assets/images/logo.png')),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});
+  final ImageProvider titleImage;
+  const MyHomePage({super.key, required this.titleImage});
 
   Container buildProfileCard(String profileType) {
     return Container(
@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // The title text which will be shown on the action bar
-        title: Text("Library App"),
+        title: Image(image: titleImage, height: 20, fit: BoxFit.contain),
       ),
       body: SingleChildScrollView(
           child:
