@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       // A widget which will be started on application startup
-      home: MyHomePage(titleImage: AssetImage('..assets/images/logo.png')),
+      home: MyHomePage(titleImage: AssetImage('assets/images/logo.png')),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
   final ImageProvider titleImage;
-  const MyHomePage({super.key, required this.titleImage});
+  const MyHomePage({Key? key, required this.titleImage});
 
   Container buildProfileCard(String profileType) {
     return Container(
