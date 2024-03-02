@@ -6,7 +6,7 @@ class MyCustomForm extends StatefulWidget {
   final Function(String) onSubmit;
   final String initialText;
 
-  const MyCustomForm({Key? key, required this.onSubmit, required this.initialText});
+  const MyCustomForm({super.key, required this.onSubmit, required this.initialText});
 
   @override
   State<MyCustomForm> createState() => _MyCustomFormState();
@@ -22,26 +22,41 @@ class _MyCustomFormState extends State<MyCustomForm>{
   }
 
   @override
+  void initState() {
+    super.initState();
+    myController.text = widget.initialText;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: TextField(
           controller: myController,
-          decoration: const InputDecoration(
-            labelText: 'Enter your username',
+          decoration: InputDecoration(
+            labelText: 'Enter Username Below',
+            suffixIcon: IconButton(
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                myController.clear();
+                widget.onSubmit('Enter Username Below');
+              },
+            )
           ),
           onSubmitted: (text) {
             widget.onSubmit(text);
+            myController.clear();
           },
         ),
       ),
     );
-}
+  }
 }
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
+
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -63,7 +78,7 @@ class _ProfileState extends State<Profile> {
     });
   }
 
-  void _saveText(String text) {
+  void _saveText(String text){
     _prefs.setString('enteredText', text);
   }
 
@@ -73,16 +88,20 @@ class _ProfileState extends State<Profile> {
           appBar: AppBar(
               actions: [
                   BackButton(
-                      onPressed: () => {Navigator.pop(context)},
-                    )
+                    onPressed: () => {Navigator.pop(context)},
+                  )
                 ],
-              title: Text("Profile")
+              title: const Text("Profile"),
             ),
-          body: Column(children: [
-              Center(child: 
-                Title(color: Colors.green, child: Text("Profile", style: const TextStyle(fontSize: 40))),
+          body: Column(
+            children: [
+              Center(
+                child: Title(
+                  color: Colors.green, 
+                  child: const Text("Profile", style: TextStyle(fontSize: 40))
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Stack(
@@ -91,35 +110,35 @@ class _ProfileState extends State<Profile> {
                   Container(
                     width: 120,
                     height: 120,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.green
                     ),
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 50,
                     backgroundColor: Colors.white,
                     child: Text("P", style: TextStyle(fontSize: 48)),
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              enteredText != null
-                ? Text(
+              enteredText != null ? 
+              Text(
                   enteredText!,
-                  style: TextStyle(fontSize: 32),
-                )
-                : Center(
-                  child: Title(
-                      color: Colors.green, 
-                      child: Text(
-                        "Waiting", 
-                        style: TextStyle(fontSize: 32)
-                      ),
-                    ),
+                  style: const TextStyle(fontSize: 32),
+                ) :
+              Center(
+                child: Title(
+                  color: Colors.green, 
+                  child: const Text(
+                    "Enter Username Below", 
+                    style: TextStyle(fontSize: 32)
                   ),
+                ),
+              ),
               SizedBox(
                 height: 100,
                 child: MyCustomForm(
