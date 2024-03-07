@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -9,30 +7,36 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
+
+  MaterialColor _customPrimarySwatch(int hexColor) {
+    Map<int, Color> color = {
+      50: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .1),
+      100: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .2),
+      200: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .3),
+      300: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .4),
+      400: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .5),
+      500: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .6),
+      600: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .7),
+      700: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .8),
+      800: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .9),
+      900: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, 1),
+    };
+    return MaterialColor(hexColor, color);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //Routes
-      routes: {
-        '/': (context) => const MyHomePage(titleImage: AssetImage('assets/images/logo.png')),
-        '/libraries': (context) => const LibrariesPage(titleImage: AssetImage('assets/images/logo.png')),
-      },
-      // Application name
       title: "Hello",
-      // Application theme data, you can set the colors for the application as
-      // you want
       theme: ThemeData(
-        // useMaterial3: true,
-        primarySwatch: Colors.green,
+        primarySwatch: _customPrimarySwatch(0xFF0a481e),
       ),
-      // A widget which will be started on application startup
-      //home: const MyHomePage(titleImage: AssetImage('assets/images/logo.png')),
+      home: const MyHomePage(titleImage: AssetImage('assets/images/logo.png')),
     );
   }
 }
 
-class SignUpForm extends StatefulWidget{
+class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
 
   @override
@@ -63,7 +67,7 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  void _addUser(BuildContext context, String name, String email) async {
+  Future<void> _addUser(BuildContext context, String name, String email) async {
     await _database.insert(
       'users',
       {
@@ -73,20 +77,20 @@ class _SignUpFormState extends State<SignUpForm> {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
 
-    Navigator.pushNamed(
+    Navigator.push(
       context,
-      '/libraries',
+      MaterialPageRoute(builder: (context) => const LibrariesPage(titleImage: AssetImage('assets/images/logo.png'))),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: [ 
         Center(
           child: Title(
             color: Colors.green,
-            child: const Text("Sign Up", style: TextStyle(fontSize: 40, color: Colors.green)),
+            child: const Text("Sign Up", style: TextStyle(fontSize: 40, color: Color(0xFF0a481e))),
           ),
         ),
         Padding(
@@ -126,12 +130,17 @@ class _SignUpFormState extends State<SignUpForm> {
               );
             }
           },
-          child: const Text('Sign Up', style: TextStyle(fontSize: 24)),
+          child: const SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: Center(
+              child: Text('Sign Up', style: TextStyle(fontSize: 24)),
+            ),
+          ),
         ),
       ],
     );
   }
-
 }
 
 class MyHomePage extends StatelessWidget {
