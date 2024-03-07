@@ -60,7 +60,7 @@ class _LibraryDetailsState extends State<LibraryDetails> {
         ],
         title: Text(widget.profileType),
       ),
-      body: Center(child: Text("Details")),
+      body: const Center(child: Text("Details")),
     );
   }
 }
@@ -109,7 +109,7 @@ class LibrariesPage extends StatelessWidget {
                 buildLibraryItem(context, "SOUR"),
                 buildLibraryItem(context, "1989 Taylor's Version"),
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.book),
                   onPressed: () {
                     //Create function that will create a form
                     //Form will be used to create a new LibraryItem
