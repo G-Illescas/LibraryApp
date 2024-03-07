@@ -10,16 +10,26 @@ class MyApp extends StatelessWidget {
 
   MaterialColor _customPrimarySwatch(int hexColor) {
     Map<int, Color> color = {
-      50: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .1),
-      100: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .2),
-      200: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .3),
-      300: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .4),
-      400: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .5),
-      500: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .6),
-      600: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .7),
-      700: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .8),
-      800: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .9),
-      900: Color.fromRGBO(Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, 1),
+      50: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .1),
+      100: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .2),
+      200: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .3),
+      300: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .4),
+      400: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .5),
+      500: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .6),
+      600: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .7),
+      700: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .8),
+      800: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, .9),
+      900: Color.fromRGBO(
+          Color(hexColor).red, Color(hexColor).green, Color(hexColor).blue, 1),
     };
     return MaterialColor(hexColor, color);
   }
@@ -79,18 +89,21 @@ class _SignUpFormState extends State<SignUpForm> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const LibrariesPage(titleImage: AssetImage('assets/images/logo.png'))),
+      MaterialPageRoute(
+          builder: (context) => const LibrariesPage(
+              titleImage: AssetImage('assets/images/logo.png'))),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [ 
+      children: [
         Center(
           child: Title(
             color: Colors.green,
-            child: const Text("Sign Up", style: TextStyle(fontSize: 40, color: Color(0xFF0a481e))),
+            child: const Text("Sign Up",
+                style: TextStyle(fontSize: 40, color: Color(0xFF0a481e))),
           ),
         ),
         Padding(
@@ -123,10 +136,10 @@ class _SignUpFormState extends State<SignUpForm> {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('User added successfully')),
               );
-            }
-            else {
+            } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Please fill all fields')),
+                const SnackBar(
+                    content: Text('Please do not leave any fields blank')),
               );
             }
           },
@@ -152,12 +165,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image(
-          image: titleImage, 
-          height: 80, 
-          fit: BoxFit.contain
-        )
-      ),
+          title: Image(image: titleImage, height: 80, fit: BoxFit.contain)),
       body: const SignUpForm(),
     );
   }

@@ -109,7 +109,7 @@ class LibrariesPage extends StatelessWidget {
                 buildLibraryItem(context, "SOUR"),
                 buildLibraryItem(context, "1989 Taylor's Version"),
                 IconButton(
-                  icon: const Icon(Icons.book),
+                  icon: const Icon(Icons.add),
                   onPressed: () {
                     //Create function that will create a form
                     //Form will be used to create a new LibraryItem
