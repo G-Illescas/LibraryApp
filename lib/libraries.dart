@@ -4,8 +4,9 @@ Widget buildLibraryItem(BuildContext context, String profileType) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
-        context, 
-        MaterialPageRoute(builder: (context) => LibraryDetails(profileType: profileType)),
+        context,
+        MaterialPageRoute(
+            builder: (context) => LibraryDetails(profileType: profileType)),
       );
     },
     child: Container(
@@ -14,14 +15,9 @@ Widget buildLibraryItem(BuildContext context, String profileType) {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.green,
-          width: 2.0
-        ),
+        border: Border.all(color: Colors.green, width: 2.0),
       ),
-      child: Column(
-        children: [Text(profileType)]
-      ),
+      child: Column(children: [Text(profileType)]),
     ),
   );
 }
@@ -43,7 +39,7 @@ Container buildTitle(String titlename) {
   );
 }
 
-class LibraryDetails extends StatefulWidget{
+class LibraryDetails extends StatefulWidget {
   final String profileType;
 
   const LibraryDetails({super.key, required this.profileType});
@@ -52,17 +48,19 @@ class LibraryDetails extends StatefulWidget{
   _LibraryDetailsState createState() => _LibraryDetailsState();
 }
 
-class _LibraryDetailsState extends State<LibraryDetails>{
+class _LibraryDetailsState extends State<LibraryDetails> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          BackButton(onPressed: () => {Navigator.pop(context)},)
+          BackButton(
+            onPressed: () => {Navigator.pop(context)},
+          )
         ],
         title: Text(widget.profileType),
       ),
-      body: Center(child: Text("Details")),
+      body: const Center(child: Text("Details")),
     );
   }
 }
@@ -110,6 +108,16 @@ class LibrariesPage extends StatelessWidget {
               children: [
                 buildLibraryItem(context, "SOUR"),
                 buildLibraryItem(context, "1989 Taylor's Version"),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    //Create function that will create a form
+                    //Form will be used to create a new LibraryItem
+                    //Along with form, allow users to use a barcode scanner
+                    //Barcode scanner can be used to auto fill form
+                    //Once form is complete add a new LibraryItem where the button was pressed
+                  },
+                ),
               ],
             ),
           ],
@@ -119,8 +127,10 @@ class LibrariesPage extends StatelessWidget {
         currentIndex: _currentIndex,
         items: [
           const BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          const BottomNavigationBarItem(icon: Icon(Icons.book_sharp), label: "Libraries"),
-          const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.book_sharp), label: "Libraries"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: "Profile"),
         ],
         onTap: (int index) {
           if (index == 0) {
